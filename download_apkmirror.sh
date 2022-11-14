@@ -2,11 +2,11 @@
 
 declare -A apks
 
-apks["com.twitter.android"]=dl_twitter
+apks["com.twitter.android.apk"]=dl_twitter
 apks["com.google.android.youtube.apk"]=dl_yt
-apks["tv.twitch.android.app"]=dl_twitch
+apks["tv.twitch.android.app.apk"]=dl_twitch
 apks["com.google.android.apps.youtube.music.apk"]=dl_ytm
-apks["com.reddit.frontpage"]=dl_reddit
+apks["com.reddit.frontpage.apk"]=dl_reddit
 
 ## Functions
 
