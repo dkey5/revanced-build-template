@@ -82,6 +82,20 @@ fi
 [[ ! -z "$excluded_patches" ]] && populate_patches "-e" "$excluded_patches"
 [[ ! -z "$included_patches" ]] && populate_patches "-i" "$included_patches"
 
+echo ""
+echo "************************************"
+echo "Building Twitter APK"
+echo "************************************"
+if [ -f "com.twitter.android.apk" ]; then
+    echo "Building APK"
+    java -jar revanced-cli.jar -b revanced-patches.jar --mount \
+	${patches[@]} \
+        $EXPERIMENTAL \
+        -a com.twitter.android.apk -o build/revanced-twitter.apk
+else
+    echo "Cannot find Twitter APK, skipping build"
+fi
+
 echo "************************************"
 echo "Building YouTube APK"
 echo "************************************"
@@ -102,6 +116,21 @@ if [ -f "com.google.android.youtube.apk" ]; then
 else
     echo "Cannot find YouTube APK, skipping build"
 fi
+
+echo ""
+echo "************************************"
+echo "Building Twitch APK"
+echo "************************************"
+if [ -f "tv.twitch.android.app.apk" ]; then
+    echo "Building APK"
+    java -jar revanced-cli.jar -b revanced-patches.jar --mount \
+        ${patches[@]} \
+        $EXPERIMENTAL \
+        -a tv.twitch.android.app.apk -o build/revanced-twitch.apk
+else
+    echo "Cannot find Twitch APK, skipping build"
+fi
+
 echo ""
 echo "************************************"
 echo "Building YouTube Music APK"
@@ -119,4 +148,18 @@ if [ -f "com.google.android.apps.youtube.music.apk" ]; then
         -a com.google.android.apps.youtube.music.apk -o build/revanced-music-nonroot.apk
 else
     echo "Cannot find YouTube Music APK, skipping build"
+fi
+
+echo ""
+echo "************************************"
+echo "Building Reddit APK"
+echo "************************************"
+if [ -f "com.reddit.frontpage.apk" ]; then
+    echo "Building APK"
+    java -jar revanced-cli.jar -b revanced-patches.jar --mount \
+        ${patches[@]} \
+        $EXPERIMENTAL \
+        -a com.reddit.frontpage.apk -o build/revanced-reddit.apk
+else
+    echo "Cannot find Reddit APK, skipping build"
 fi

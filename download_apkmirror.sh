@@ -2,8 +2,11 @@
 
 declare -A apks
 
+apks["com.twitter.android"]=dl_twitter
 apks["com.google.android.youtube.apk"]=dl_yt
+apks["tv.twitch.android.app"]=dl_twitch
 apks["com.google.android.apps.youtube.music.apk"]=dl_ytm
+apks["com.reddit.frontpage"]=dl_reddit
 
 ## Functions
 
@@ -35,6 +38,25 @@ dl_apk() {
 	req "$url" "$output"
 }
 
+# Downloading twitter
+dl_twitter() {
+	echo "Downloading Twitter"
+	local last_ver
+	last_ver="$version"
+	last_ver="${last_ver:-$(get_apk_vers "https://www.apkmirror.com/uploads/?appcategory=twitter" | get_largest_ver)}"
+
+	echo "Choosing version '${last_ver}'"
+	local base_apk="com.twitter.android.apk"
+	if [ ! -f "$base_apk" ]; then
+		declare -r dl_url=$(dl_apk "https://www.apkmirror.com/apk/twitter-inc/twitter/twitter-${last_ver//./-}-release/" \
+			"APK</span>[^@]*@\([^#]*\)" \
+			"$base_apk")
+		echo "Twitter version: ${last_ver}"
+		echo "downloaded from: [APKMirror - Twitter]($dl_url)"
+	fi
+}
+
+
 # Downloading youtube
 dl_yt() {
 	echo "Downloading YouTube"
@@ -50,6 +72,24 @@ dl_yt() {
 			"$base_apk")
 		echo "YouTube version: ${last_ver}"
 		echo "downloaded from: [APKMirror - YouTube]($dl_url)"
+	fi
+}
+
+# Downloading twitch
+dl_twitch() {
+	echo "Downloading Twitch"
+	local last_ver
+	last_ver="$version"
+	last_ver="${last_ver:-$(get_apk_vers "https://www.apkmirror.com/uploads/?appcategory=twitch" | get_largest_ver)}"
+
+	echo "Choosing version '${last_ver}'"
+	local base_apk="tv.twitch.android.app.apk"
+	if [ ! -f "$base_apk" ]; then
+		declare -r dl_url=$(dl_apk "https://www.apkmirror.com/apk/twitch-interactive-inc/twitch/twitch-${last_ver//./-}-release/" \
+			"APK</span>[^@]*@\([^#]*\)" \
+			"$base_apk")
+		echo "Twitch version: ${last_ver}"
+		echo "downloaded from: [APKMirror - Twitch]($dl_url)"
 	fi
 }
 
@@ -78,6 +118,24 @@ dl_ytm() {
 			"$base_apk")
 		echo "\nYouTube Music (${arch}) version: ${last_ver}"
 		echo "downloaded from: [APKMirror - YouTube Music ${arch}]($dl_url)"
+	fi
+}
+
+# Downloading reddit
+dl_reddit() {
+	echo "Downloading Reddit"
+	local last_ver
+	last_ver="$version"
+	last_ver="${last_ver:-$(get_apk_vers "https://www.apkmirror.com/uploads/?appcategory=reddit" | get_largest_ver)}"
+
+	echo "Choosing version '${last_ver}'"
+	local base_apk="com.reddit.frontpage.apk"
+	if [ ! -f "$base_apk" ]; then
+		declare -r dl_url=$(dl_apk "https://www.apkmirror.com/apk/redditinc/reddit/reddit-${last_ver//./-}-release/" \
+			"APK</span>[^@]*@\([^#]*\)" \
+			"$base_apk")
+		echo "Reddit version: ${last_ver}"
+		echo "downloaded from: [APKMirror - Reddit]($dl_url)"
 	fi
 }
 

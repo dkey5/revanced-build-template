@@ -1,4 +1,7 @@
 {
+    "com.twitter.android.apk": "9.65.3-release.0",
     "com.google.android.youtube.apk": "17.43.36",
-    "com.google.android.apps.youtube.music.apk": "5.31.50"
+    "tv.twitch.android.app.apk": "14.1.0",
+    "com.google.android.apps.youtube.music.apk": "5.31.50",
+    "com.reddit.frontpage.apk": "2022.42.0"
 }
